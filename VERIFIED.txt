@@ -1,0 +1,31 @@
+Verified on 2026-10-31 with Node.js 24.15.0 and Blender 5.2.2.
+
+Automated API tests passed:
+- Start, change and repair leak; flow accounting balances.
+- Server-sent event delivery and incident history.
+- Reject invalid JSON, excessive payloads, invalid losses and unknown pipes.
+- Identical commands are idempotent.
+- Allowed browser origin and blocked unknown origin.
+- Applied revision acknowledgement and stale heartbeat detection.
+
+Live integration passed against the open township model:
+- Normal state acknowledged by Blender.
+- 3.6 L/s leak: spray visible, normal label hidden, 0.55 flow multiplier,
+  label shows 4.40 L/s delivered and 3.60 L/s lost; acknowledgement synchronized.
+- 8 L/s leak: downstream tracer position remained unchanged across checks.
+- Repair: spray hidden, flow multiplier restored to 1.
+- Bridge stop restored the original animation actions; restart succeeded.
+
+After verification, the background controller was stopped at the user's request.
+Start manually with node controller.js; stop with Ctrl+C.
+Blender bridge can reconnect on manual startup. Original .blend file was not overwritten.
+Your existing dashboard has not been connected; use dashboard-client.js and README.md.
+
+Follow-up: controller availability now controls live animation.
+- With the user's manually started server online, bridge connected and tracers moved.
+- Temporarily unavailable endpoint paused the bridge and displayed an offline label.
+- All 57 water tracers and 22 spray droplets retained identical positions while offline.
+- Restoring the controller endpoint resumed motion automatically.
+- This connection-loss check did not stop or restart the user's Node process.
+The bridge stays loaded and waiting while offline. After reopening Blender it must
+be loaded once again; no Node background service or auto-start entry was installed.
